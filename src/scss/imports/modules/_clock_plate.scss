@@ -9,14 +9,18 @@ $clock-plate-color: darkgrey !default;
 .clock-plate {
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: $clock-plate-color;
 
-    &__spcae {
+    &__space + &__space {
+        margin-left: 4rem;
     }
 
     &__dots {
+        margin-right: 2rem;
+        margin-left: 2rem;
+
         &::before,
         &::after {
             content: '';

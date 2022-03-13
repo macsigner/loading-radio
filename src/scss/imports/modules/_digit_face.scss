@@ -1,0 +1,222 @@
+/**
+ * digit-face bem module
+ */
+@use 'sass:math';
+
+$digit-face-size: 4rem !default;
+$digit-face-stroke-width: 8px !default;
+$digit-face-line-space: 2px !default;
+
+@mixin digit-face-number-1 {
+    &--top-right,
+    &--bottom-right {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-2 {
+    &--top,
+    &--top-right,
+    &--center,
+    &--bottom-left,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-3 {
+    &--top,
+    &--top-right,
+    &--center,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-4 {
+    &--top-left,
+    &--top-right,
+    &--center,
+    &--bottom-right {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-5 {
+    &--top,
+    &--top-left,
+    &--center,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-6 {
+    &--top,
+    &--top-left,
+    &--center,
+    &--bottom-left,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-7 {
+    &--top,
+    &--top-right,
+    &--bottom-right {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-8 {
+    &--top,
+    &--top-left,
+    &--top-right,
+    &--center,
+    &--bottom-left,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-9 {
+    &--top,
+    &--top-left,
+    &--top-right,
+    &--center,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+@mixin digit-face-number-0 {
+    &--top,
+    &--top-left,
+    &--top-right,
+    &--bottom-left,
+    &--bottom-right,
+    &--bottom {
+        opacity: 1;
+    }
+}
+
+.digit-face {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    &__line {
+        grid-column: 1 / -1;
+        width: $digit-face-size;
+        height: $digit-face-stroke-width;
+        opacity: .1;
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            width: calc(100% - #{$digit-face-line-space});
+            margin: auto;
+            border: math.div($digit-face-stroke-width, 2) solid $color-red-digit;
+            border-color: $color-red-digit transparent;
+        }
+
+        &::before {
+            border-top: none;
+        }
+
+        &::after {
+            border-bottom: none;
+        }
+    }
+
+    &__line--vertical {
+        display: flex;
+        grid-column: span 1;
+        flex-basis: $digit-face-stroke-width;
+        width: $digit-face-stroke-width;
+        height: $digit-face-size;
+
+        & + & {
+            margin-left: auto;
+        }
+
+        &::before,
+        &::after {
+            width: auto;
+            height: calc(100% - #{$digit-face-line-space});
+            border: math.div($digit-face-stroke-width, 2) solid $color-red-digit;
+            border-color: transparent $color-red-digit;
+        }
+
+        &::before {
+            border-left: none;
+        }
+
+        &::after {
+            border-right: none;
+        }
+    }
+
+    &__line--top,
+    &__line--center,
+    &__line--bottom {
+        margin-top: math.div($digit-face-stroke-width, -2);
+        margin-bottom: math.div($digit-face-stroke-width, -2);
+    }
+
+    &__line--top-left,
+    &__line--bottom-left {
+        margin-left: math.div($digit-face-stroke-width, -2);
+    }
+
+    &__line--top-right,
+    &__line--bottom-right {
+        margin-right: math.div($digit-face-stroke-width, -2);
+    }
+
+    &--number-1 &__line {
+        @include digit-face-number-1;
+    }
+
+    &--number-2 &__line {
+        @include digit-face-number-2;
+    }
+
+    &--number-3 &__line {
+        @include digit-face-number-3;
+    }
+
+    &--number-4 &__line {
+        @include digit-face-number-4;
+    }
+
+    &--number-5 &__line {
+        @include digit-face-number-5;
+    }
+
+    &--number-6 &__line {
+        @include digit-face-number-6;
+    }
+
+    &--number-7 &__line {
+        @include digit-face-number-7;
+    }
+
+    &--number-8 &__line {
+        @include digit-face-number-8;
+    }
+
+    &--number-9 &__line {
+        @include digit-face-number-9;
+    }
+
+    &--number-0 &__line {
+        @include digit-face-number-0;
+    }
+}
