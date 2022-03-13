@@ -1,0 +1,21 @@
+/**
+ * Settings variables.
+ */
+@use "sass:math";
+
+$base-width-max-width: 54rem;
+$base-width-side-margin: 2rem;
+
+/* colors */
+$color-black: #000;
+$color-white: #FFF;
+
+/* font-sizes */
+$font-size-90: 1.4rem;
+$font-size-100: 1.8rem;
+$font-size-110: 4rem;
+
+/* settings */
+$transition-duration-default-in: .3s;
+$transition-duration-default-out: .8s;
+
