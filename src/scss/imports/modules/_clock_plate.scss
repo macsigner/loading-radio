@@ -1,0 +1,33 @@
+/**
+ * clock-plate bem module
+ */
+
+$clock-plate-dot-size: 1rem;
+$clock-plate-dot-color: $color-red-digit !default;
+$clock-plate-color: darkgrey !default;
+
+.clock-plate {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $clock-plate-color;
+
+    &__spcae {
+    }
+
+    &__dots {
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            width: $clock-plate-dot-size;
+            height: $clock-plate-dot-size;
+            background-color: $clock-plate-dot-color;
+        }
+
+        &::after {
+            margin-top: 3rem;
+        }
+    }
+}
