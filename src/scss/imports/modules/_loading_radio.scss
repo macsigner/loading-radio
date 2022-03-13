@@ -1,0 +1,14 @@
+/**
+ * loading-radio bem module
+ */
+
+$loading-radio-h-size: 40rem;
+$loading-radio-v-size: 16rem;
+
+.loading-radio {
+    &__front-plate {
+        width: $loading-radio-h-size;
+        height: $loading-radio-v-size;
+        border: 1rem solid black;
+    }
+}

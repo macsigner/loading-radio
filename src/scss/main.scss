@@ -1,3 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '/node_modules/normalize.css/normalize.css';
+@import 'imports/settings/variables';
+@import 'imports/custom_reset';
+@import 'imports/base';
+
+// Early modules
+@import 'imports/modules/loading_radio';

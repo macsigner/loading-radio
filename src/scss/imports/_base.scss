@@ -6,6 +6,10 @@
     --base-width-side-margin: #{$base-width-side-margin};
 }
 
+body {
+    font: 1.6rem/1.6 sans-serif;
+}
+
 /**
  * Sticky footer.
  */
@@ -21,6 +25,9 @@ body > footer {
 }
 
 body > main {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     flex: 1 1 auto;
 }
 
@@ -32,4 +39,13 @@ body > main {
     max-width: var(--base-width-max-width);
     margin-right: auto;
     margin-left: auto;
+}
+
+body > header,
+body > footer {
+    @extend .base-width;
+
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
 }
