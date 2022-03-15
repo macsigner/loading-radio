@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "watch": "npx parcel src/index.html --open",
+        "watch": "npx parcel --log-level=verbose src/index.html --open",
         "predeploy": "rm -rf dist && npx parcel build src/index.html --public-url /exercise-loading-radio",
         "deploy": "gh-pages -d dist"
     },

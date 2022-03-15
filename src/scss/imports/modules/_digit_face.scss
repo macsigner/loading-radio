@@ -2,107 +2,99 @@
  * digit-face bem module
  */
 @use 'sass:math';
+@use "sass:map";
 
 $digit-face-size: 4rem !default;
 $digit-face-stroke-width: 8px !default;
 $digit-face-line-space: 2px !default;
+$digit-list: (
+    'reset': (
+        'top',
+        'top-left',
+        'top-right',
+        'center',
+        'bottom-left',
+        'bottom-right',
+        'bottom',
+    ),
+    0: (
+        'top',
+        'top-left',
+        'top-right',
+        'bottom-left',
+        'bottom-right',
+        'bottom',
+    ),
+    1: (
+        'top-right',
+        'bottom-right',
+    ),
+    2: (
+        'top',
+        'top-right',
+        'center',
+        'bottom-left',
+        'bottom',
+    ),
+    3: (
+        'top',
+        'top-right',
+        'center',
+        'bottom-right',
+        'bottom',
+    ),
+    4: (
+        'top-left',
+        'top-right',
+        'center',
+        'bottom-right',
+    ),
+    5: (
+        'top',
+        'top-left',
+        'center',
+        'bottom-right',
+        'bottom',
+    ),
+    6: (
+        'top',
+        'top-left',
+        'center',
+        'bottom-left',
+        'bottom-right',
+        'bottom',
+    ),
+    7: (
+        'top',
+        'top-right',
+        'bottom-right',
+    ),
+    8: (
+        'top',
+        'top-left',
+        'top-right',
+        'center',
+        'bottom-left',
+        'bottom-right',
+        'bottom',
+    ),
+    9: (
+        'top',
+        'top-left',
+        'top-right',
+        'center',
+        'bottom-right',
+        'bottom',
+    ),
+);
 
-@mixin digit-face-number-1 {
-    &--top-right,
-    &--bottom-right {
-        opacity: 1;
-    }
-}
+@mixin digit-face-number($i) {
+    $digit: map.get($digit-list, $i);
 
-@mixin digit-face-number-2 {
-    &--top,
-    &--top-right,
-    &--center,
-    &--bottom-left,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-3 {
-    &--top,
-    &--top-right,
-    &--center,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-4 {
-    &--top-left,
-    &--top-right,
-    &--center,
-    &--bottom-right {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-5 {
-    &--top,
-    &--top-left,
-    &--center,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-6 {
-    &--top,
-    &--top-left,
-    &--center,
-    &--bottom-left,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-7 {
-    &--top,
-    &--top-right,
-    &--bottom-right {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-8 {
-    &--top,
-    &--top-left,
-    &--top-right,
-    &--center,
-    &--bottom-left,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-9 {
-    &--top,
-    &--top-left,
-    &--top-right,
-    &--center,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
-    }
-}
-
-@mixin digit-face-number-0 {
-    &--top,
-    &--top-left,
-    &--top-right,
-    &--bottom-left,
-    &--bottom-right,
-    &--bottom {
-        opacity: 1;
+    @each $pos in $digit {
+        &--#{$pos} {
+            @content;
+        }
     }
 }
 
@@ -180,43 +172,11 @@ $digit-face-line-space: 2px !default;
         margin-right: math.div($digit-face-stroke-width, -2);
     }
 
-    &--number-1 &__line {
-        @include digit-face-number-1;
-    }
-
-    &--number-2 &__line {
-        @include digit-face-number-2;
-    }
-
-    &--number-3 &__line {
-        @include digit-face-number-3;
-    }
-
-    &--number-4 &__line {
-        @include digit-face-number-4;
-    }
-
-    &--number-5 &__line {
-        @include digit-face-number-5;
-    }
-
-    &--number-6 &__line {
-        @include digit-face-number-6;
-    }
-
-    &--number-7 &__line {
-        @include digit-face-number-7;
-    }
-
-    &--number-8 &__line {
-        @include digit-face-number-8;
-    }
-
-    &--number-9 &__line {
-        @include digit-face-number-9;
-    }
-
-    &--number-0 &__line {
-        @include digit-face-number-0;
+    @for $i from 0 through 9 {
+        &--number-#{$i} &__line {
+            @include digit-face-number($i) {
+                opacity: 1;
+            }
+        }
     }
 }
