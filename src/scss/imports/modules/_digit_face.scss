@@ -98,6 +98,23 @@ $digit-list: (
     }
 }
 
+@mixin digit-face-number-animation($number, $steps, $animation-name) {
+    $digit: map.get($digit-list, $number);
+
+    @each $pos in $digit {
+        $stepPercentage: math.div(100%, $steps);
+        @keyframes #{$animation-name}-#{$pos}-#{$number} {
+            0% {
+                opacity: 1;
+            }
+
+            #{$stepPercentage} {
+                opacity: 0;
+            }
+        }
+    }
+}
+
 .digit-face {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -179,4 +196,36 @@ $digit-list: (
             }
         }
     }
+
+    &--hour-left {
+
+    }
+
+    &--hour-right {
+
+    }
+
+    &--minute-left {
+
+    }
+
+    &--minute-right {
+
+    }
+
+    .run {
+
+    }
+}
+
+@for $i from 0 through 2 {
+    @include digit-face-number-animation($i, 2.4, two-four);
+}
+
+@for $i from 0 through 9 {
+    @include digit-face-number-animation($i, 10, ten);
+}
+
+@for $i from 0 through 5 {
+    @include digit-face-number-animation($i, 6, ten);
 }
