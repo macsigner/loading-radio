@@ -8,7 +8,7 @@ $digit-face-size: 4rem !default;
 $digit-face-stroke-width: 8px !default;
 $digit-face-line-space: 2px !default;
 $digit-list: (
-    'reset': (
+    'all': (
         'top',
         'top-left',
         'top-right',
@@ -98,20 +98,39 @@ $digit-list: (
     }
 }
 
-@mixin digit-face-number-animation($number, $steps, $animation-name) {
-    $digit: map.get($digit-list, $number);
+@mixin digit-face-number-animation($steps, $animation-name, $pos) {
+    $stepPercentage: math.div(100%, $steps);
 
-    @each $pos in $digit {
-        $stepPercentage: math.div(100%, $steps);
-        @keyframes #{$animation-name}-#{$pos}-#{$number} {
-            0% {
-                opacity: 1;
+    @keyframes #{$animation-name}-#{$pos} {
+        @for $i from 0 through math.floor($steps) {
+            #{math.clamp(0%, (($stepPercentage * $i) - 1%), 100%)} {
+                $digit: map.get($digit-list, $i);
+
+                @if index($digit, $pos) != null {
+                    opacity: 1;
+                } @else {
+                    opacity: 0.1;
+                }
             }
+            #{math.clamp(0%, (($stepPercentage * $i) + 1%), 100%)} {
+                $digit: map.get($digit-list, $i);
 
-            #{$stepPercentage} {
-                opacity: 0;
+                @if index($digit, $pos) != null {
+                    opacity: 1;
+                } @else {
+                    opacity: 0.1;
+                }
             }
         }
+    }
+}
+
+@mixin digit-face-apply-animation($pos, $animation-name, $steps, $duration, $delay: 0s) {
+    &--#{$pos} {
+        animation-name: #{$animation-name}-#{$pos};
+        animation-delay: $delay;
+        animation-timing-function: steps(#{$steps});
+        animation-duration: $duration;
     }
 }
 
@@ -124,6 +143,7 @@ $digit-list: (
         width: $digit-face-size;
         height: $digit-face-stroke-width;
         opacity: .1;
+        animation-iteration-count: infinite;
 
         &::before,
         &::after {
@@ -197,35 +217,35 @@ $digit-list: (
         }
     }
 
-    &--hour-left {
-
+    &--hour-left &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, two-point-four, 24, 60s * 60 * 24);
+        }
     }
 
-    &--hour-right {
-
+    &--hour-right &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, ten, 10, 60s * 60);
+        }
     }
 
-    &--minute-left {
-
+    &--minute-left &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, six, 6, 60s);
+        }
     }
 
-    &--minute-right {
-
-    }
-
-    .run {
-
+    &--minute-right &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, ten, 10, 10s);
+        }
     }
 }
 
-@for $i from 0 through 2 {
-    @include digit-face-number-animation($i, 2.4, two-four);
-}
+@each $pos in map.get($digit-list, 'all') {
+    @include digit-face-number-animation(2.4, two-point-four, $pos);
 
-@for $i from 0 through 9 {
-    @include digit-face-number-animation($i, 10, ten);
-}
+    @include digit-face-number-animation(10, ten, $pos);
 
-@for $i from 0 through 5 {
-    @include digit-face-number-animation($i, 6, ten);
+    @include digit-face-number-animation(6, six, $pos);
 }
