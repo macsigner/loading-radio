@@ -6,12 +6,22 @@ $loading-radio-h-size: 40rem;
 $loading-radio-v-size: 16rem;
 
 .loading-radio {
+    display: flex;
+    align-items: flex-start;
+    max-width: 90%;
     padding: 3rem;
     background-color: $color-brown-wood;
 
+    &__front-plate,
+    &__side-plate {
+        border: 1rem solid black;
+    }
+
     &__front-plate {
         display: flex;
-        width: $loading-radio-h-size;
-        border: 1rem solid black;
+    }
+
+    &__side-plate {
+        margin-left: 2rem;
     }
 }

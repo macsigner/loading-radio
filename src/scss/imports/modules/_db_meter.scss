@@ -1,0 +1,144 @@
+/**
+ * db-meter bem module
+ */
+
+$db-meter-width: 22rem;
+$db-meter-height: 10rem;
+$db-meter-v-origin: 24rem;
+$db-meter-grade-degrees: (
+    -22, -17, -12, -9.5, -7, -5, -3, 0, 4.4, 8.8, 13.2, 17.6, 22
+);
+
+:root {
+    --db-meter-sound-delay: 2s;
+    --db-meter-buzz-duration: 2s;
+}
+
+@mixin db-meter-grade-transform($deg, $i) {
+    &:nth-child(#{$i}) {
+        transform: rotate(#{$deg}deg);
+    }
+
+    &:nth-child(#{$i}) &-amount {
+        transform: translateX(-50%) rotate(#{$deg * -1}deg);
+    }
+}
+
+.db-meter {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: $db-meter-width;
+    height: $db-meter-height;
+    box-shadow: $plate-shadow;
+    background-color: whitesmoke;
+
+    &__scale {
+        position: relative;
+        width: 80%;
+        height: 80%;
+    }
+
+    &__grade,
+    &__needle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 1px;
+        height: 1.6rem;
+        margin: 2rem auto 0;
+        background-color: var(--color);
+        transform-origin: 50% $db-meter-v-origin;
+    }
+
+    &__grade {
+
+        @for $i from 1 through length($db-meter-grade-degrees) {
+            $deg: nth($db-meter-grade-degrees, $i);
+
+            @include db-meter-grade-transform($deg, $i);
+        }
+
+        &:nth-child(10) ~ & {
+            --color: red;
+
+            width: 2px;
+
+            .db-meter__grade-amount {
+                font-weight: bold;
+            }
+        }
+    }
+
+    &__grade-amount {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        font-size: .9em;
+        color: var(--color);
+    }
+
+    &__needle {
+        background-color: transparent;
+        animation-name: needle-buzz, needle-loud, needle-loud;
+        animation-timing-function: cubic-bezier(0.19, 0.63, 0.88, 0.37);
+        animation-delay: calc(var(--clock-plate-radio-delay) + var(--db-meter-sound-delay)),
+        calc(var(--clock-plate-radio-delay) + var(--db-meter-buzz-duration) + var(--db-meter-sound-delay)),
+        calc(var(--clock-plate-radio-delay) + var(--db-meter-buzz-duration) + var(--db-meter-sound-delay));
+        animation-duration: var(--db-meter-buzz-duration), 2s, 2.341s;
+        animation-iteration-count: 1, infinite;
+        transform: rotate(-22deg);
+    }
+
+    &__needle::after {
+        content: '';
+        position: absolute;
+        top: -1rem;
+        right: 0;
+        left: 0;
+        height: $db-meter-height;
+        background-color: darkorange;
+        box-shadow: $instrument-shadow;
+    }
+}
+
+@keyframes needle-buzz {
+    10%, 16%, 23% {
+        transform: rotate(2deg);
+    }
+
+    25% {
+        transform: rotate(4deg);
+    }
+
+    7%, 13%, 18% {
+        transform: rotate(-3deg);
+    }
+}
+
+@keyframes needle-loud {
+    0%, 100% {
+        transform: rotate(-3deg);
+    }
+    10%, 16%, 23% {
+        transform: rotate(19deg);
+    }
+
+    7%, 13%, 18% {
+        transform: rotate(8deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    48%, 62% {
+        transform: rotate(8deg);
+    }
+
+    52%, 64% {
+        transform: rotate(10deg);
+    }
+}
