@@ -104,7 +104,7 @@ $digit-list: (
     @keyframes #{$animation-name}-#{$pos} {
         @for $i from 0 through math.floor($steps) {
             #{math.clamp(0%, (($stepPercentage * $i)), 100%)} {
-                $digit: map.get($digit-list, $i);
+                $digit: map.get($digit-list, ($i % 10));
 
                 @if index($digit, $pos) != null {
                     opacity: 1;
@@ -116,17 +116,16 @@ $digit-list: (
     }
 }
 
-@mixin digit-face-apply-animation($pos, $animation-name, $steps, $duration, $delay: 0s) {
+@mixin digit-face-apply-animation($pos, $animation-name, $duration) {
     &--#{$pos} {
         animation-name: #{$animation-name}-#{$pos};
-        animation-delay: calc(#{$delay} + var(--digit-face-total-delay));
-        animation-duration: $duration;
-        animation-direction: reverse;
+        animation-duration: calc(#{$duration} * (1 / var(--digit-face-speed-factor)));
     }
 }
 
 :root {
-    --digit-face-total-delay: 0s;
+    --digit-face-total-delay: 1s;
+    --digit-face-speed-factor: 1;
 }
 
 .digit-face {
@@ -140,6 +139,7 @@ $digit-list: (
         opacity: .1;
         animation-iteration-count: infinite;
         animation-timing-function: step-end;
+        animation-delay: var(--digit-face-total-delay);
 
         &::before,
         &::after {
@@ -215,25 +215,25 @@ $digit-list: (
 
     &--hour-left &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, two-point-four, 24, 60s * 60 * 24);
+            @include digit-face-apply-animation($pos, two-point-four, (60s * 24));
         }
     }
 
     &--hour-right &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, ten, 10, 60s * 60);
+            @include digit-face-apply-animation($pos, twenty-four, (60s * 24));
         }
     }
 
     &--minute-left &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, six, 7, 60s);
+            @include digit-face-apply-animation($pos, six, 60s);
         }
     }
 
     &--minute-right &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, ten, 10, 10s);
+            @include digit-face-apply-animation($pos, ten, 10s);
         }
     }
 }
@@ -241,7 +241,9 @@ $digit-list: (
 @each $pos in map.get($digit-list, 'all') {
     @include digit-face-number-animation(2.4, two-point-four, $pos);
 
-    @include digit-face-number-animation(10, ten, $pos);
+    @include digit-face-number-animation(24, twenty-four, $pos);
 
     @include digit-face-number-animation(6, six, $pos);
+
+    @include digit-face-number-animation(10, ten, $pos);
 }
