@@ -103,22 +103,13 @@ $digit-list: (
 
     @keyframes #{$animation-name}-#{$pos} {
         @for $i from 0 through math.floor($steps) {
-            #{math.clamp(0%, (($stepPercentage * $i) - 1%), 100%)} {
+            #{math.clamp(0%, (($stepPercentage * $i)), 100%)} {
                 $digit: map.get($digit-list, $i);
 
                 @if index($digit, $pos) != null {
                     opacity: 1;
                 } @else {
-                    opacity: 0.1;
-                }
-            }
-            #{math.clamp(0%, (($stepPercentage * $i) + 1%), 100%)} {
-                $digit: map.get($digit-list, $i);
-
-                @if index($digit, $pos) != null {
-                    opacity: 1;
-                } @else {
-                    opacity: 0.1;
+                    opacity: 0.05;
                 }
             }
         }
@@ -128,10 +119,14 @@ $digit-list: (
 @mixin digit-face-apply-animation($pos, $animation-name, $steps, $duration, $delay: 0s) {
     &--#{$pos} {
         animation-name: #{$animation-name}-#{$pos};
-        animation-delay: $delay;
-        animation-timing-function: steps(#{$steps});
+        animation-delay: calc(#{$delay} + var(--digit-face-total-delay));
         animation-duration: $duration;
+        animation-direction: reverse;
     }
+}
+
+:root {
+    --digit-face-total-delay: 0s;
 }
 
 .digit-face {
@@ -144,6 +139,7 @@ $digit-list: (
         height: $digit-face-stroke-width;
         opacity: .1;
         animation-iteration-count: infinite;
+        animation-timing-function: step-end;
 
         &::before,
         &::after {
@@ -231,7 +227,7 @@ $digit-list: (
 
     &--minute-left &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, six, 6, 60s);
+            @include digit-face-apply-animation($pos, six, 7, 60s);
         }
     }
 
