@@ -11,12 +11,23 @@
 </head>
 <body>
 <header>
-<h1>Loading Radio</h1>
+    <h1>Loading Radio</h1>
 </header>
 <main>
     <div class="loading-radio">
         <div class="loading-radio__front-plate">
             <div class="clock-plate">
+                <div class="clock-plate__info">
+                    <div class="clock-plate__radio-info-item clock-plate__radio-info-item--radio">
+                        <div class="clock-plate__dot"></div>
+                        <div class="clock-plate__radio-info-text">Radio</div>
+                    </div>
+                    <div class="clock-plate__radio-info-item clock-plate__radio-info-item--frequencies">
+                        <div class="clock-plate__radio-info-text clock-plate__radio-info-text--disabled">LW</div>
+                        <div class="clock-plate__radio-info-text clock-plate__radio-info-text--fm">FM</div>
+                        <div class="clock-plate__radio-info-text clock-plate__radio-info-text--disabled">MW</div>
+                    </div>
+                </div>
                 <div class="clock-plate__space">
                     <div class="digit-face digit-face--hour-left">
                         <div class="digit-face__line digit-face__line--top"></div>
@@ -39,7 +50,10 @@
                         <div class="digit-face__line digit-face__line--bottom"></div>
                     </div>
                 </div>
-                <div class="clock-plate__dots"></div>
+                <div class="clock-plate__dots">
+                    <div class="clock-plate__dot clock-plate__dot--time"></div>
+                    <div class="clock-plate__dot clock-plate__dot--time"></div>
+                </div>
                 <div class="clock-plate__space">
                     <div class="digit-face digit-face--minute-left">
                         <div class="digit-face__line digit-face__line--top"></div>

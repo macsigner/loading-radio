@@ -6,14 +6,64 @@ $clock-plate-dot-size: 1rem;
 $clock-plate-dot-color: $color-red-digit !default;
 $clock-plate-color: darkgrey !default;
 
+:root {
+    --clock-plate-radio-delay: 4s;
+}
+
 .clock-plate {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     padding: 1rem;
     background-color: $clock-plate-color;
     box-shadow: inset 0 0 5px rgba(black, .3), inset 4px 4px 5px rgba(black, .4);
+
+    &__info {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+    }
+
+    &__radio-info-item {
+        align-items: center;
+        display: flex;
+        filter: $lc-shadow;
+    }
+
+    &__radio-info-item--radio {
+        animation-name: radio-on;
+        animation-timing-function: step-end;
+        animation-delay: var(--clock-plate-radio-delay);
+        animation-fill-mode: both;
+    }
+
+    &__radio-info-item--frequencies {
+        display: flex;
+        margin-left: 2rem;
+        text-decoration: underline;
+    }
+
+    &__radio-info-text {
+        margin-left: .6rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &__radio-info-text--disabled {
+        opacity: $disabled-opacity;
+    }
+
+    &__radio-info-text--fm {
+        animation-name: radio-on;
+        animation-timing-function: step-end;
+        animation-delay: calc(var(--clock-plate-radio-delay) + 1.4s);
+        animation-fill-mode: both;
+    }
 
     &__space + &__space {
         margin-left: 4rem;
@@ -22,18 +72,47 @@ $clock-plate-color: darkgrey !default;
     &__dots {
         margin-right: 2rem;
         margin-left: 2rem;
+    }
 
-        &::before,
-        &::after {
-            content: '';
-            display: block;
-            width: $clock-plate-dot-size;
-            height: $clock-plate-dot-size;
-            background-color: $clock-plate-dot-color;
-        }
+    &__dot {
+        content: '';
+        display: block;
+        width: $clock-plate-dot-size;
+        height: $clock-plate-dot-size;
+        background-color: $clock-plate-dot-color;
+        filter: $lc-shadow;
+    }
 
-        &::after {
-            margin-top: 3rem;
-        }
+    &__dot + &__dot {
+        margin-top: 3rem;
+    }
+
+    &__dot--time {
+        animation-name: blink;
+        animation-timing-function: step-end;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-delay: var(--clock-plate-radio-delay);
+        animation-duration: 2s;
+    }
+}
+
+@keyframes radio-on {
+    from {
+        opacity: $disabled-opacity;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: $disabled-opacity;
+    }
+
+    50%, 100% {
+        opacity: 1;
     }
 }

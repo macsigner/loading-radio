@@ -124,7 +124,7 @@ $digit-list: (
 }
 
 :root {
-    --digit-face-total-delay: 1s;
+    --digit-face-total-delay: calc(#{((60s * 6)) * -1} + var(--clock-plate-radio-delay));
     --digit-face-speed-factor: 1;
 }
 
@@ -137,7 +137,7 @@ $digit-list: (
         grid-column: 1 / -1;
         width: $digit-face-size;
         height: $digit-face-stroke-width;
-        opacity: .1;
+        opacity: $disabled-opacity;
         animation-iteration-count: infinite;
         animation-timing-function: step-end;
         animation-delay: var(--digit-face-total-delay);
@@ -248,3 +248,4 @@ $digit-list: (
 
     @include digit-face-number-animation(10, ten, $pos);
 }
+

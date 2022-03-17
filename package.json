@@ -4,8 +4,9 @@
     "description": "",
     "scripts": {
         "watch": "npx parcel --log-level=verbose src/index.html --open",
-        "predeploy": "rm -rf dist && npx parcel build src/index.html --public-url /exercise-loading-radio",
-        "deploy": "gh-pages -d dist"
+        "predeploy": "rm -rf dist && npx parcel build src/index.html --public-url /loading-radio",
+        "deploy": "npm run predeploy && npm run ghPages",
+        "ghPages": "gh-pages -d dist"
     },
     "keywords": [],
     "author": "",
