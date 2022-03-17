@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
         "watch": "npx parcel --log-level=verbose src/index.html --open",
-        "predeploy": "rm -rf dist && npx parcel build src/index.html --public-url /loading-radio",
+        "predeploy": "rm -rf dist && npx parcel build src/index.html --public-url ./",
         "deploy": "npm run predeploy && npm run ghPages",
         "ghPages": "gh-pages -d dist"
     },
@@ -19,5 +19,6 @@
         "parcel": "^2.3.2",
         "postcss": "^8.4.8",
         "tailwindcss": "^3.0.23"
-    }
+    },
+    "parcelDisableLoaders": ["js"]
 }
