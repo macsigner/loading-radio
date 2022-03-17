@@ -131,6 +131,7 @@ $digit-list: (
 .digit-face {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    filter: $lc-shadow;
 
     &__line {
         grid-column: 1 / -1;
