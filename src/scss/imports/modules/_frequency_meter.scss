@@ -9,10 +9,11 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, auto);
-    grid-template-rows: repeat(3, min-max(10px, 1fr));
+    grid-template-rows: repeat(4, min-max(10px, 1fr));
     grid-template-areas: 'description wheel'
     'description wheel'
-    'description wheel';
+    'description wheel'
+    '. settings-wheel';
 
     &__wheel {
         position: relative;
@@ -30,8 +31,28 @@
             right: 0;
             bottom: 0;
             left: 0;
+            z-index: 2;
             box-shadow: $wheel-shadow;
         }
+    }
+
+    &__wheel--lower {
+        margin-top: 1rem;
+        grid-area: settings-wheel;
+        cursor: pointer;
+    }
+
+    &__wheel--lower::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        border-radius: 50%;
+        box-shadow: inset 0 0 6px 2px rgba(black, 1), 0 0 40px 40px rgba(black, 1);
     }
 
     &__wheel-inner {
@@ -39,11 +60,21 @@
         box-sizing: content-box;
         padding: .4rem 50%;
         animation-name: frequency-search;
-        animation-duration: 6s;
-        animation-timing-function: linear;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out;
         animation-fill-mode: both;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
         animation-play-state: paused;
-        animation-delay: -1s;
+        animation-delay: -.5s;
+    }
+
+    &__wheel--lower &__wheel-inner {
+        flex-basis: 240%;
+        min-height: 3rem;
+        background-image: linear-gradient(90deg, transparent 0px, rgba($color-metallic, .4) 5px, rgba($color-metallic, .4) 8px, white 10px, transparent 16px), linear-gradient(rgba($color-metallic, .4), transparent, rgba($color-metallic, .4));
+        background-repeat: repeat;
+        background-size: 10px 100%, 100% 100%;
     }
 
     &__wheel-row {
@@ -61,7 +92,7 @@
         background-color: $color-needle;
     }
 
-    &:hover &__wheel-inner {
+    input[id="frequency-forward"]:active ~ * &__wheel-inner {
         animation-play-state: running;
     }
 
