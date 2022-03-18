@@ -7,8 +7,13 @@ $loading-radio-v-size: 16rem;
 
 .loading-radio {
     position: relative;
-    display: flex;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: minmax(46rem, 100%) minmax(30rem, 100%);
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 'clock-face db-meter'
+    'clock-face frequency-meter'
+    'bottom-plate bottom-plate';
+    grid-gap: 1rem 2rem;
     max-width: 90%;
     padding: 3rem;
     border-radius: 1rem;
@@ -39,16 +44,24 @@ $loading-radio-v-size: 16rem;
     }
 
     &__front-plate,
-    &__side-plate {
+    &__side-plate,
+    &__frequency-plate {
         border: 1rem solid black;
         border-radius: $panel-radius;
     }
 
     &__front-plate {
+        grid-area: clock-face;
         display: flex;
     }
 
     &__side-plate {
-        margin-left: 2rem;
+        grid-area: db-meter;
+    }
+
+    &__frequency-plate {
+        padding: 1rem;
+        background-color: whitesmoke;
+        box-shadow: $plate-shadow;
     }
 }

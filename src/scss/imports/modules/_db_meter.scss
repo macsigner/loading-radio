@@ -2,7 +2,6 @@
  * db-meter bem module
  */
 
-$db-meter-width: 22rem;
 $db-meter-height: 10rem;
 $db-meter-v-origin: 24rem;
 $db-meter-grade-degrees: (
@@ -29,7 +28,6 @@ $db-meter-grade-degrees: (
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    width: $db-meter-width;
     height: $db-meter-height;
     box-shadow: $plate-shadow;
     background-color: whitesmoke;
@@ -103,7 +101,7 @@ $db-meter-grade-degrees: (
         right: 0;
         left: 0;
         height: $db-meter-height;
-        background-color: darkorange;
+        background-color: $color-needle;
         box-shadow: $instrument-shadow;
     }
 }

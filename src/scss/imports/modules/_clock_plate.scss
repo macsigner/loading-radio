@@ -16,7 +16,7 @@ $clock-plate-color: darkgrey !default;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 1rem 3rem;
     background-color: $clock-plate-color;
     box-shadow: $plate-shadow;
 
@@ -26,6 +26,7 @@ $clock-plate-color: darkgrey !default;
         align-items: center;
         flex: 0 0 100%;
         margin-bottom: 2rem;
+        align-self: flex-start;
     }
 
     &__radio-info-item {

@@ -13,6 +13,7 @@ $color-red-digit: red;
 $color-brown-wood: #98390c;
 $color-orange-bulb: #f99020;
 $color-metallic: #A8A9AD;
+$color-needle: darkorange;
 
 /* font-sizes */
 $font-size-90: 1.4rem;
@@ -24,6 +25,7 @@ $transition-duration-default-in: .3s;
 $transition-duration-default-out: .8s;
 $lc-shadow: drop-shadow(0px 0px 2px rgba(black, 0.1)) drop-shadow(2px 2px 2px rgba(black, 0.2));
 $plate-shadow: inset 0 0 5px rgba(black, .3), inset 4px 4px 5px rgba(black, .4);
+$wheel-shadow: inset -4px 0px 22px 10px rgba(black, .9), inset 4px 0 18px 8px rgba(black, .8);
 $instrument-shadow: 5px -2px 6px rgba(black, .2), 2px 4px 2px rgba(black, .4);
 $disabled-opacity: .1;
 $panel-radius: .4rem;

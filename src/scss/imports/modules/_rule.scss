@@ -1,0 +1,43 @@
+/**
+ * rule bem module
+ */
+
+.rule {
+    display: flex;
+    align-items: center;
+    padding: .4rem 0;
+
+    &__item-title {
+        font-size: .8em;
+    }
+
+    &__item-wrap {
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 1px;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 2rem;
+            background-color: var(--color);
+        }
+    }
+
+    &__item + &__item {
+        margin-left: 1px;
+    }
+
+    &__item:empty::after {
+        height: 1.2rem;
+    }
+}

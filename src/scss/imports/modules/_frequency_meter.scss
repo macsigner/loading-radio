@@ -1,0 +1,87 @@
+/**
+ * frequency-meter bem module
+ */
+
+.frequency-meter {
+    --color: whitesmoke;
+    --bg-color: black;
+
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, min-max(10px, 1fr));
+    grid-template-areas: 'description wheel'
+    'description wheel'
+    'description wheel';
+
+    &__wheel {
+        position: relative;
+        display: flex;
+        grid-area: wheel;
+        overflow: hidden;
+        color: var(--color);
+        background-color: var(--bg-color);
+
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            box-shadow: $wheel-shadow;
+        }
+    }
+
+    &__wheel-inner {
+        flex: 0 0 140%;
+        box-sizing: content-box;
+        padding: .4rem 50%;
+        animation-name: frequency-search;
+        animation-duration: 6s;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-play-state: paused;
+        animation-delay: -1s;
+    }
+
+    &__wheel-row {
+        flex: 0 0 100%;
+    }
+
+    &__needle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 2px;
+        background-color: $color-needle;
+    }
+
+    &:hover &__wheel-inner {
+        animation-play-state: running;
+    }
+
+    &__description {
+        grid-area: description;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-right: 1rem;
+    }
+}
+
+@keyframes frequency-search {
+    from {
+        margin-left: 0;
+        transform: translateX(0);
+    }
+    to {
+        margin-left: 100%;
+        transform: translateX(-100%);
+    }
+}
