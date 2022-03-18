@@ -41,6 +41,7 @@ $loading-radio-v-size: 16rem;
     &__front-plate,
     &__side-plate {
         border: 1rem solid black;
+        border-radius: $panel-radius;
     }
 
     &__front-plate {
