@@ -9,10 +9,11 @@ $loading-radio-v-size: 16rem;
     position: relative;
     display: grid;
     grid-template-columns: minmax(46rem, 100%) minmax(30rem, 100%);
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(4, auto);
     grid-template-areas: 'clock-face db-meter'
     'clock-face frequency-meter'
-    'bottom-plate bottom-plate';
+    'clock-face frequency-meter'
+    'settings-panel frequency-meter';
     grid-gap: 1rem 2rem;
     max-width: 90%;
     padding: 3rem;
@@ -45,7 +46,8 @@ $loading-radio-v-size: 16rem;
 
     &__front-plate,
     &__side-plate,
-    &__frequency-plate {
+    &__frequency-plate,
+    &__settings-panel {
         border: 1rem solid black;
         border-radius: $panel-radius;
     }
@@ -60,8 +62,30 @@ $loading-radio-v-size: 16rem;
     }
 
     &__frequency-plate {
+        grid-area: frequency-meter;
         padding: 1rem;
         background-color: whitesmoke;
         box-shadow: $plate-shadow;
+    }
+
+    &__settings-panel {
+        overflow: hidden;
+        grid-area: settings-panel;
+        background-color: dimgrey;
+
+        &::after {
+            content: 'Settings';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 4rem;
+            margin: .8rem;
+            font-weight: 900;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: dimgrey;
+            background-color: black;
+            box-shadow: 0 0 .4rem .8rem black;
+        }
     }
 }
