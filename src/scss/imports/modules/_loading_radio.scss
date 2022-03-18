@@ -21,6 +21,26 @@ $loading-radio-v-size: 16rem;
     border: 1rem solid scale-color($color-brown-wood, $lightness: -50%);
     background-color: $color-brown-wood;
 
+    @include media-desktop-small {
+        grid-template-columns: minmax(40rem, 100%) minmax(24rem, 100%);
+    }
+
+    @include media-tablet {
+        grid-template-columns: repeat(2, minmax(10px, 1fr));
+        grid-template-areas: 'clock-face clock-face'
+        'clock-face clock-face'
+        'db-meter frequency-meter'
+        'settings-panel frequency-meter';
+    }
+
+    @include media-mobile {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'clock-face'
+        'db-meter'
+        'frequency-meter'
+        'settings-panel';
+    }
+
     &::before,
     &::after {
         content: '';

@@ -1,5 +1,6 @@
 @import '/node_modules/normalize.css/normalize.css';
 @import 'imports/settings/variables';
+@import 'imports/mixins/mixin_media_queries';
 @import 'imports/custom_reset';
 @import 'imports/base';
 @import 'imports/helper';

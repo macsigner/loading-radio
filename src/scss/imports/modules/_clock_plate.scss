@@ -154,22 +154,39 @@ $clock-plate-color: darkgrey !default;
 
     &__space + &__space {
         margin-left: 4rem;
+
+        @include media-mobile {
+            margin-left: .8rem;
+        }
     }
 
     &__space + &__space--seconds {
         margin-left: 2rem;
+
+        @include media-mobile {
+            margin-left: 1.4rem;
+        }
+    }
+
+    &__space--seconds + &__space--seconds {
+        margin-left: .8rem;
     }
 
     &__dots {
         margin-right: 2rem;
         margin-left: 2rem;
+
+        @include media-mobile {
+            margin-right: .8rem;
+            margin-left: .8rem;
+        }
     }
 
     &__dot {
         content: '';
         display: block;
-        width: $clock-plate-dot-size;
-        height: $clock-plate-dot-size;
+        width: var(--digit-face-stroke-width);
+        height: var(--digit-face-stroke-width);
         background-color: $clock-plate-dot-color;
         filter: $lc-shadow;
     }

@@ -1,6 +1,7 @@
 /**
  * HTML styling/reset
  */
+@use 'sass:math';
 
 /**
  * Adjust box sizing on site.
@@ -16,6 +17,14 @@
  */
 html {
     font-size: 62.5%;
+
+    @include media-desktop-small {
+        font-size: .78125vw;
+    }
+
+    @include media-tablet {
+        font-size: 62.5%;
+    }
 }
 
 /**

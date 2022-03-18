@@ -128,6 +128,11 @@ $digit-list: (
     --digit-face-speed-factor: 1;
     --digit-face-size: #{$digit-face-size};
     --digit-face-stroke-width: #{$digit-face-stroke-width};
+
+    @include media-mobile {
+        --digit-face-size: 2.4rem;
+        --digit-face-stroke-width: 4px;
+    }
 }
 
 .digit-face {
@@ -220,6 +225,11 @@ $digit-list: (
     &--seconds-right {
         --digit-face-size: 2rem;
         --digit-face-stroke-width: 6px;
+
+        @include media-mobile {
+            --digit-face-size: 1.4rem;
+            --digit-face-stroke-width: 4px;
+        }
     }
 
     &--hour-left &__line {
