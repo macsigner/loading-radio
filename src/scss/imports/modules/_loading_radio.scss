@@ -99,6 +99,7 @@ $loading-radio-v-size: 16rem;
             justify-content: center;
             align-items: center;
             height: 4rem;
+            min-height: calc(100% - 1.6rem);
             margin: .8rem;
             font-weight: 900;
             letter-spacing: .1em;
