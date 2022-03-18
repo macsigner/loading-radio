@@ -35,7 +35,8 @@ $clock-plate-color: darkgrey !default;
         filter: $lc-shadow;
     }
 
-    &__radio-info-item--radio {
+    &__radio-info-item--radio,
+    &__radio-info-item--alarm {
         animation-name: radio-on;
         animation-timing-function: step-end;
         animation-delay: var(--clock-plate-radio-delay);
@@ -46,6 +47,87 @@ $clock-plate-color: darkgrey !default;
         display: flex;
         margin-left: 2rem;
         text-decoration: underline;
+    }
+
+    &__radio-info-item--alarm {
+        margin-left: auto;
+    }
+
+    &__alarm-bell {
+        position: relative;
+        width: 1rem;
+        height: 1.2rem;
+        margin-left: 1rem;
+        border-radius: 1rem 1rem 0 0 / 1.2rem 1.2rem 0 0;
+        background-color: black;
+        transform: rotate(30deg);
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            margin: auto;
+            background-color: black;
+        }
+
+        &::before {
+            top: 0;
+            left: 50%;
+            width: .4rem;
+            height: .4rem;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &::after {
+            bottom: 0;
+            left: 50%;
+            width: calc(100% + 4px);
+            height: 4px;
+            border-radius: 2px;
+            transform: translateX(-50%);
+        }
+    }
+
+    &__alarm-wave {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+        animation-name: blink;
+        animation-timing-function: step-end;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-delay: var(--clock-plate-radio-delay);
+        animation-duration: 2s;
+
+        &,
+        &::before,
+        &::after {
+            border-left: 2px solid black;
+            border-radius: 50%;
+        }
+
+        &::before,
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        &::before {
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+
+        &::after {
+            width: .8rem;
+            height: .8rem;
+        }
     }
 
     &__radio-info-text {
