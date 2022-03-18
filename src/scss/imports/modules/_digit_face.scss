@@ -124,8 +124,10 @@ $digit-list: (
 }
 
 :root {
-    --digit-face-total-delay: calc(#{((60s * 6)) * -1} + var(--clock-plate-radio-delay));
+    --digit-face-total-delay: calc(#{((60s * 60 * 6)) * -1} + var(--clock-plate-radio-delay));
     --digit-face-speed-factor: 1;
+    --digit-face-size: #{$digit-face-size};
+    --digit-face-stroke-width: #{$digit-face-stroke-width};
 }
 
 .digit-face {
@@ -135,8 +137,8 @@ $digit-list: (
 
     &__line {
         grid-column: 1 / -1;
-        width: $digit-face-size;
-        height: $digit-face-stroke-width;
+        width: var(--digit-face-size);
+        height: var(--digit-face-stroke-width);
         opacity: $disabled-opacity;
         animation-iteration-count: infinite;
         animation-timing-function: step-end;
@@ -148,7 +150,7 @@ $digit-list: (
             display: block;
             width: calc(100% - #{$digit-face-line-space});
             margin: auto;
-            border: math.div($digit-face-stroke-width, 2) solid $color-red-digit;
+            border: calc(var(--digit-face-stroke-width) / 2) solid $color-red-digit;
             border-color: $color-red-digit transparent;
         }
 
@@ -164,9 +166,9 @@ $digit-list: (
     &__line--vertical {
         display: flex;
         grid-column: span 1;
-        flex-basis: $digit-face-stroke-width;
-        width: $digit-face-stroke-width;
-        height: $digit-face-size;
+        flex-basis: var(--digit-face-stroke-width);
+        width: var(--digit-face-stroke-width);
+        height: var(--digit-face-size);
 
         & + & {
             margin-left: auto;
@@ -176,7 +178,7 @@ $digit-list: (
         &::after {
             width: auto;
             height: calc(100% - #{$digit-face-line-space});
-            border: math.div($digit-face-stroke-width, 2) solid $color-red-digit;
+            border: calc(var(--digit-face-stroke-width) / 2) solid $color-red-digit;
             border-color: transparent $color-red-digit;
         }
 
@@ -192,18 +194,18 @@ $digit-list: (
     &__line--top,
     &__line--center,
     &__line--bottom {
-        margin-top: math.div($digit-face-stroke-width, -2);
-        margin-bottom: math.div($digit-face-stroke-width, -2);
+        margin-top: calc(var(--digit-face-stroke-width) / -2);
+        margin-bottom: calc(var(--digit-face-stroke-width) / -2);
     }
 
     &__line--top-left,
     &__line--bottom-left {
-        margin-left: math.div($digit-face-stroke-width, -2);
+        margin-left: calc(var(--digit-face-stroke-width) / -2);
     }
 
     &__line--top-right,
     &__line--bottom-right {
-        margin-right: math.div($digit-face-stroke-width, -2);
+        margin-right: calc(var(--digit-face-stroke-width) / -2);
     }
 
     @for $i from 0 through 9 {
@@ -214,25 +216,43 @@ $digit-list: (
         }
     }
 
+    &--seconds-left,
+    &--seconds-right {
+        --digit-face-size: 2rem;
+        --digit-face-stroke-width: 6px;
+    }
+
     &--hour-left &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, two-point-four, (60s * 24));
+            @include digit-face-apply-animation($pos, two-point-four, (60s * 60 * 24));
         }
     }
 
     &--hour-right &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, twenty-four, (60s * 24));
+            @include digit-face-apply-animation($pos, twenty-four, (60s * 60 * 24));
         }
     }
 
     &--minute-left &__line {
         @each $pos in map.get($digit-list, 'all') {
-            @include digit-face-apply-animation($pos, six, 60s);
+            @include digit-face-apply-animation($pos, six, (60s * 60));
         }
     }
 
     &--minute-right &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, ten, (10s * 60));
+        }
+    }
+
+    &--seconds-left &__line {
+        @each $pos in map.get($digit-list, 'all') {
+            @include digit-face-apply-animation($pos, six, 60s);
+        }
+    }
+
+    &--seconds-right &__line {
         @each $pos in map.get($digit-list, 'all') {
             @include digit-face-apply-animation($pos, ten, 10s);
         }

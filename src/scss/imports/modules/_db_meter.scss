@@ -92,6 +92,13 @@ $db-meter-grade-degrees: (
         animation-duration: var(--db-meter-buzz-duration), 2s, 2.341s;
         animation-iteration-count: 1, infinite;
         transform: rotate(-22deg);
+
+        input[id="frequency-forward"]:active ~ * & {
+            animation-name: db-meter-drop;
+            animation-delay: 0s;
+            animation-duration: .8s;
+            animation-timing-function: ease-out;
+        }
     }
 
     &__needle::after {
@@ -151,5 +158,14 @@ $db-meter-grade-degrees: (
     }
     to {
         box-shadow: inset 2px 1px 6px 2px rgba(black, .3), inset 0px 10px 30px rgba($color-orange-bulb, .95), inset 3px -10px 50px rgba($color-orange-bulb, .6);
+    }
+}
+
+@keyframes db-meter-drop {
+    from {
+        transform: rotate(12deg);
+    }
+    to {
+        transform: rotate(-22deg);
     }
 }

@@ -66,8 +66,16 @@ $clock-plate-color: darkgrey !default;
         animation-fill-mode: both;
     }
 
+    &__space--seconds {
+        margin-top: calc(var(--digit-face-size) * -1);
+    }
+
     &__space + &__space {
         margin-left: 4rem;
+    }
+
+    &__space + &__space--seconds {
+        margin-left: 2rem;
     }
 
     &__dots {
